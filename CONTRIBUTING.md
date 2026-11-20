@@ -1,26 +1,24 @@
 # Contributing
 
-Contributions are welcome as long as their genuine goal is to **make OMOTG better** — not to pad a profile or portfolio.
+Contributions should improve Prabu's homelab bootstrap experience and preserve its ZeroClaw-to-OMO architecture.
 
 ## Ground Rules
 
-- **No commercial use.** This project is CC BY-NC 4.0. Your contributions fall under the same license. Contact me directly for commercial licensing.
-- **No profile farming.** Trivial PRs (typo fixes without context, variable renames without reasoning) will be closed. I value your time — please value mine.
-- **Quality over quantity.** One well-reasoned PR that solves a real problem > 10 cosmetic ones.
+- Prabu is standard-library-only Go. Do not add external Go dependencies without explicit approval.
+- ZeroClaw owns Telegram channels, including direct messages, group mentions, authorization, and forum-topic routing.
+- OMO Native is invoked through the ZeroClaw shell tool with `omo -p`; do not add `opencode_cli` or a parallel Telegram bridge.
+- Keep secrets out of configuration TOML, command arguments, logs, and tests. Use ZeroClaw's secret-aware config interface.
+- `uninstall` must preserve ZeroClaw/OMO user configuration, credentials, memory, and workspaces.
+- This repository is licensed CC BY-NC 4.0. Read [LICENSE](LICENSE) before contributing.
 
-## Pull Request Process
+## Before Submitting
 
-1. Fork the repo (it's private — ask me for collaborator access if you prefer working directly).
-2. Branch from `main`.
-3. Ensure `go build ./...` and `go vet ./...` pass.
-4. If adding a feature, include tests where practical.
-5. Explain **why** the PR is needed — what problem it solves and what approach it takes.
-6. I'll review when I can. Could be fast, could be slow. Please be patient.
+```sh
+go test ./...
+go build -o prabu .
+go vet ./...
+```
 
-## Getting Started
+Add tests for new CLI behavior and preserve existing tests. For changes to installers or lifecycle commands, include an isolated-home scenario with controlled upstream executables; never run installer or service changes on a developer host as part of tests.
 
-Read the [README.md](README.md) — everything is there. If you have an idea but aren't sure how to implement it, open an issue first and we'll discuss.
-
----
-
-Thanks for wanting to help. It means a lot.
+Keep user-facing documentation in English. Do not commit unless the repository owner asks for it.

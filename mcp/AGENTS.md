@@ -1,4 +1,6 @@
-# mcp/ — MCP SSE Server (JSON-RPC 2.0 over SSE)
+# mcp/ — Legacy MCP SSE Server (JSON-RPC 2.0 over SSE)
+
+This package is retained for source and test compatibility with pre-Prabu releases. The active `prabu` executable does not expose an MCP SSE server or import this package. Do not add new product features here.
 
 ## OVERVIEW
 

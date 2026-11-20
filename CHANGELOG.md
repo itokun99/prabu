@@ -1,9 +1,27 @@
 # Changelog
 
-All notable changes to OMOTG are documented here.
+All notable changes to Prabu are documented here.
 
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+### Added
+
+- Prabu CLI setup, doctor, update, and uninstall commands for the ZeroClaw + OMO Native homelab stack.
+- Native ZeroClaw Telegram configuration for direct messages, group mentions, and forum-topic replies.
+- OMO Native execution through ZeroClaw's shell tool; the active runtime no longer starts the OpenCode bridge.
+
+### Changed
+
+- Project and Go module identity changed from `omotg` to `prabu`.
+- Telegram credentials are configured through ZeroClaw's secret-aware JSON Patch input, not a webhook environment file.
+- Uninstall removes only Prabu-managed binaries and service state while preserving user data.
+
+### Legacy
+
+- The old root config loader and the `bot/` and `mcp/` packages remain for source and test compatibility, but are not wired into the Prabu executable.
 
 ## [v0.7.0] — 2026-06-24
 

@@ -1,6 +1,8 @@
-# bot/ — Telegram ↔ OpenCode Bridge Package
+# bot/ — Legacy Telegram ↔ OpenCode Bridge Package
 
-**Package:** `bot` (import `"omotg/bot"`)
+This package is retained for source and test compatibility with pre-Prabu releases. The active `prabu` executable does not import or start it. Do not add new product features here; make only compatibility or test-owner fixes.
+
+**Package:** `bot` (import `"github.com/itokun99/prabu/bot"`)
 
 ## FILES & OWNERSHIP
 
