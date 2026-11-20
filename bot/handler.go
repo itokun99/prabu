@@ -66,20 +66,7 @@ func escapeTelegramHTML(s string) string {
 func buildPrompt(chatID, threadID int64, sessionID, prompt string, persona *BotPersona) string {
 	var b strings.Builder
 	b.WriteString(prompt)
-	b.WriteString("\n\nHere is the chat context for this message:\n")
-	fmt.Fprintf(&b, " chat_id: %d\n", chatID)
-	fmt.Fprintf(&b, " thread_id: %d\n", threadID)
-	fmt.Fprintf(&b, " session_id: %s", sessionID)
-	if persona != nil {
-		fmt.Fprintf(&b, "\n bot_name: %s", persona.FirstName)
-		if persona.Username != "" {
-			fmt.Fprintf(&b, "\n bot_username: @%s", persona.Username)
-		}
-		if persona.Description != "" {
-			fmt.Fprintf(&b, "\n bot_description: %s", persona.Description)
-		}
-	}
-	b.WriteString("\n")
+	b.WriteString("\n\n")
 	b.WriteString("## OMOTG Behavioral Directives\n")
 	b.WriteString("This request arrived via Telegram. Follow these rules:\n")
 	b.WriteString("\n")
@@ -91,6 +78,19 @@ func buildPrompt(chatID, threadID int64, sessionID, prompt string, persona *BotP
 	b.WriteString("6. If MCP tools unavailable: skip notifications, just deliver final result.\n")
 	if persona != nil {
 		fmt.Fprintf(&b, "7. Persona aliasing: You are the Telegram bot \"%s\". When the user asks who you are, introduce yourself as \"%s\". Do not mention your internal agent name.\n", persona.FirstName, persona.FirstName)
+	}
+	b.WriteString("\nHere is the chat context for this message:\n")
+	fmt.Fprintf(&b, " chat_id: %d\n", chatID)
+	fmt.Fprintf(&b, " thread_id: %d\n", threadID)
+	fmt.Fprintf(&b, " session_id: %s", sessionID)
+	if persona != nil {
+		fmt.Fprintf(&b, "\n bot_name: %s", persona.FirstName)
+		if persona.Username != "" {
+			fmt.Fprintf(&b, "\n bot_username: @%s", persona.Username)
+		}
+		if persona.Description != "" {
+			fmt.Fprintf(&b, "\n bot_description: %s", persona.Description)
+		}
 	}
 	return b.String()
 }
