@@ -29,7 +29,7 @@ func runSetup(ctx context.Context, args []string, streams cliStreams) error {
 
 	token := strings.TrimSpace(os.Getenv("PRABU_TELEGRAM_BOT_TOKEN"))
 	if token == "" && (options.nonInteractive || !terminalInput(streams.in)) {
-		return errors.New("Telegram bot token is required; set PRABU_TELEGRAM_BOT_TOKEN or run setup from a terminal for ZeroClaw's masked prompt")
+		return errors.New("Telegram bot token is required; set PRABU_TELEGRAM_BOT_TOKEN or run setup from a terminal to enter it")
 	}
 	if !options.yes {
 		if !terminalInput(streams.in) {
@@ -111,29 +111,6 @@ func runSetup(ctx context.Context, args []string, streams cliStreams) error {
 		quiet:     true,
 	}); err != nil {
 		return err
-	}
-	if token == "" {
-		if err := runner.run(ctx, commandSpec{
-			operation: "store Telegram bot token in ZeroClaw",
-			program:   zeroClaw,
-			args:      []string{"config", "set", secretConfigPath},
-			inheritIn: true,
-		}); err != nil {
-			return err
-		}
-		activation, err := configActivationPatch()
-		if err != nil {
-			return err
-		}
-		if err := runner.run(ctx, commandSpec{
-			operation: "enable ZeroClaw Telegram channel",
-			program:   zeroClaw,
-			args:      []string{"config", "patch", "-"},
-			stdin:     bytes.NewReader(activation),
-			quiet:     true,
-		}); err != nil {
-			return err
-		}
 	}
 
 	if err := writeAgentInstructions(home); err != nil {

@@ -61,6 +61,27 @@ func validModelName(model string) bool {
 	return true
 }
 
+// readTerminalToken asks the operator for the ZeroClaw bot token on the given
+// terminal and reads one line. The token travels only via stdin here and later
+// via a JSON `config patch -` op; it never lands in argv, config, or logs. The
+// caller must have verified terminalInput first.
+func readTerminalToken(input io.Reader, out io.Writer) (string, error) {
+	fmt.Fprint(out, "Telegram bot token: ")
+	reader, ok := input.(*bufio.Reader)
+	if !ok {
+		reader = bufio.NewReader(input)
+	}
+	line, err := reader.ReadString('\n')
+	if err != nil && !errors.Is(err, io.EOF) {
+		return "", fmt.Errorf("read Telegram bot token: %w", err)
+	}
+	token := strings.TrimSpace(line)
+	if token == "" {
+		return "", errors.New("Telegram bot token must not be empty")
+	}
+	return token, nil
+}
+
 func terminalInput(input io.Reader) bool {
 	file, ok := input.(*os.File)
 	if !ok {

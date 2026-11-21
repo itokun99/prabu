@@ -114,14 +114,6 @@ func configPatch(config setupConfig) ([]byte, error) {
 	return json.Marshal(operations)
 }
 
-func configActivationPatch() ([]byte, error) {
-	operations := []configPatchOperation{}
-	if err := appendConfigPatch(&operations, channelEnablePath, true); err != nil {
-		return nil, err
-	}
-	return json.Marshal(operations)
-}
-
 func appendConfigPatch[T any](operations *[]configPatchOperation, path string, value T) error {
 	encoded, err := json.Marshal(value)
 	if err != nil {
