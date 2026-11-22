@@ -97,10 +97,7 @@ install.go       official installer and subprocess handling
 manifest.go      managed install state
 doctor.go        runtime readiness checks
 lifecycle.go     update and uninstall
-bot/, mcp/       legacy source packages; not wired into the Prabu executable
 ```
-
-The legacy root `config.go`/`config_test.go` and the `bot/` and `mcp/` packages remain for source and test compatibility. They are not wired into the Prabu executable and do not own Telegram traffic.
 
 ## Development
 
