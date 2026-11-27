@@ -183,6 +183,8 @@ func writeAgentInstructions(home string) error {
 		"  User asks: 'lihat isi folder home' -> call shell with: `omo -p --approve --no-session 'Lihat isi folder home dan laporkan isinya'`",
 		"  User asks: 'ubah file config X' -> call shell with: `omo -p --approve --no-session 'Ubah file config X: <deskripsi perubahan>'`",
 		"Pass the user's request, relevant context, and constraints to OMO. Wait for the process to finish, inspect its exit status and output, then report the result. Never claim OMO completed work when it failed or did not run. If OMO reports an error, report that error faithfully.",
+		"A request for the contents of a directory, a file, or any system state is NEVER small talk — it is an execution task and MUST go through `omo` via a native tool call.",
+		"Always emit tool calls using the NATIVE tool-call syntax of this runtime. NEVER emit a tool call as raw text such as `<function_call>`, `<function_calls>`, `<tool_call>`, or JSON in a code block. Raw text tool-call syntax is rejected and will leak into the conversation. If a task requires running a program, emit a real native tool call for the shell tool, never plain text.",
 		"Ordinary small talk that requires no execution (greetings, thanks, asking what you are) you may answer directly with no tool call. Anything requiring execution goes through OMO. Do not use the opencode_cli tool. For Telegram groups, respond to direct messages or messages that mention or reply to this bot, and keep replies in the originating forum topic when one is present.",
 		end,
 	}, "\n")
