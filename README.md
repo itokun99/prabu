@@ -30,6 +30,16 @@ Telegram uses the Bot API's long-polling `getUpdates` method. It needs outbound 
 - A ZeroClaw model provider. The default example is a local Ollama model; hosted providers may need `PRABU_PROVIDER_API_KEY`.
 - OMO Native model authentication configured on the homelab. Use `omo login` when needed; Prabu does not copy laptop credentials to the server.
 
+## Homebrew install
+
+On macOS or Linux with Homebrew:
+
+```sh
+brew install itokun99/prabu/prabu
+```
+
+The formula installs a prebuilt binary for darwin/arm64, darwin/amd64, linux/arm64, and linux/amd64. Setup still targets a Linux host — macOS binaries are for local development and building.
+
 ## Get the source
 
 ```sh
