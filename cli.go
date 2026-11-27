@@ -32,7 +32,7 @@ func runCLI(ctx context.Context, args []string, streams cliStreams) error {
 	case "uninstall":
 		return runUninstall(ctx, args[1:], streams)
 	case "version", "--version":
-		fmt.Fprintln(streams.out, "prabu dev")
+		fmt.Fprintf(streams.out, "prabu %s\n", version)
 		return nil
 	default:
 		return fmt.Errorf("unknown command %q; run prabu --help", args[0])
